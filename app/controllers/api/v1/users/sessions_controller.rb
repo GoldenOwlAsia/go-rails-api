@@ -6,7 +6,7 @@ module API
 
         def create
           strategy = {
-            local: Auth::Local.new
+            email: Auth::Local.new
           }[user_params[:provider]&.to_sym]
 
           unless strategy
