@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe DeviseJwt::PurgeExpiredJwtsJob do
-  include_examples 'enqueues_job_correctly', :low
+  it_behaves_like 'enqueues_job_correctly', :low
 
   describe '#perform' do
     let!(:user) { create(:user) }

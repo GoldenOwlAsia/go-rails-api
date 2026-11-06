@@ -14,8 +14,8 @@ module API
           render_resource(resource)
         end
 
-        def respond_to_on_destroy
-          head :no_content
+        def respond_to_on_destroy(non_navigational_status: :no_content)
+          head non_navigational_status
         end
 
         def verify_signed_out_user
