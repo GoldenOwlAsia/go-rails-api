@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore personal Claude Code settings.
+/.claude/settings.local.json
+
 # Ignore all environment files (except templates).
 /.env*
 !/.env*.erb

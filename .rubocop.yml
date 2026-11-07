@@ -219,6 +219,10 @@ Rails/BulkChangeTable:
 RSpec/AnyInstance:
   Enabled: false
 
+RSpec/DescribeClass:
+  Exclude:
+    - spec/architecture_spec.rb
+
 RSpec/EmptyExampleGroup:
   Exclude:
     - spec/requests/**/*
