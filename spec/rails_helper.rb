@@ -1,16 +1,16 @@
 require 'simplecov'
 SimpleCov.start do
-  add_filter 'config/'
-  add_filter 'spec/'
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Decorators', 'app/decorators'
-  add_group 'Jobs', 'app/jobs'
-  add_group 'Mailers', 'app/mailers'
-  add_group 'Models', 'app/models'
-  add_group 'Operations', 'app/operations'
-  add_group 'Policies', 'app/policies'
-  add_group 'Queries', 'app/queries'
-  add_group 'Serializers', 'app/serializers'
+  skip 'config/'
+  skip 'spec/'
+  group 'Controllers', 'app/controllers'
+  group 'Decorators', 'app/decorators'
+  group 'Jobs', 'app/jobs'
+  group 'Mailers', 'app/mailers'
+  group 'Models', 'app/models'
+  group 'Operations', 'app/operations'
+  group 'Policies', 'app/policies'
+  group 'Queries', 'app/queries'
+  group 'Serializers', 'app/serializers'
 end
 
 require 'spec_helper'
@@ -25,8 +25,7 @@ Dir[Rails.root.join('spec/supports/**/*.rb')].each { |f| require f }
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
-  exit 1
+  abort(e.to_s.strip)
 end
 
 RSpec.configure do |config|

@@ -1,32 +1,37 @@
 module Pagination
   extend ActiveSupport::Concern
 
-  PAGY_KEYS_TRANSFORMER = {
-    items: :page_size,
-    page: :page_number,
-    count: :total_count,
-    prev: :prev_page,
-    next: :next_page,
-    last: :last_page
-  }.freeze
+  MAX_PAGE_SIZE = 100
 
   def paginate(collection)
-    pagy(collection, page: page_number, items: page_size)
+    pagy(collection, page: page_number, limit: page_size)
   end
-
-  def paginate_array(array)
-    pagy_array(array, page: page_number, items: page_size)
-  end
+  alias paginate_array paginate
 
   def paginate_meta(pagy)
-    pagy_metadata(pagy).transform_keys { |key| PAGY_KEYS_TRANSFORMER[key] }
+    {
+      page_size: pagy.limit,
+      page_number: pagy.page,
+      total_count: pagy.count,
+      prev_page: pagy.previous,
+      next_page: pagy.next,
+      last_page: pagy.last
+    }
   end
 
   def page_number
-    params.dig(:page, :number) || 1
+    page_param(:number) || 1
   end
 
   def page_size
-    params.dig(:page, :size) || Pagy::DEFAULT[:items]
+    [page_param(:size) || Pagy::OPTIONS[:limit], MAX_PAGE_SIZE].min
+  end
+
+  private
+
+  def page_param(key)
+    page = params[:page]
+    value = page[key] if page.is_a?(ActionController::Parameters)
+    value.to_i if value.is_a?(String) && value.match?(/\A[1-9]\d*\z/)
   end
 end

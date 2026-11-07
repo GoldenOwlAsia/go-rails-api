@@ -2,8 +2,8 @@
 
 A boilerplate for quickly setting up a Rails API:
 
-- Ruby (3.4.1)
-- Rails (8.0.2)
+- Ruby (3.4.12)
+- Rails (8.1.4)
 - PostgreSQL
 - Sidekiq, Redis
 - Devise, Devise JWT
@@ -15,10 +15,10 @@ A boilerplate for quickly setting up a Rails API:
 
 Follow these steps to install and start the application:
 
-- Install ruby `3.4.1`
+- Install ruby `3.4.12`
 ```bash
-rbenv install 3.4.1
-rbenv local 3.4.1
+rbenv install 3.4.12
+rbenv local 3.4.12
 ruby -v
 ```
 - Install gems:
